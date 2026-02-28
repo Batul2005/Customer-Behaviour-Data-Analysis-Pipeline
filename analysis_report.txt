@@ -1,0 +1,87 @@
+╔══════════════════════════════════════════════════════════╗
+║   CUSTOMER BEHAVIOUR ANALYSIS — DATA PIPELINE REPORT    ║
+║   Generated: 2026-02-28 17:08:58                        ║
+╚══════════════════════════════════════════════════════════╝
+
+DATA QUALITY SUMMARY
+────────────────────────────────────────────────────────────
+  ⚠  NULLS in customers.age: 34 rows
+  ⚠  NULLS in customers.gender: 319 rows
+  ⚠  NULLS in customers.city: 255 rows
+  ⚠  NULLS in customers.plan: 413 rows
+  ⚠  NULLS in transactions.amount: 1514 rows
+  ⚠  NULLS in transactions.product_type: 9970 rows
+  ⚠  DUPLICATE transaction_ids: 300 rows
+  ⚠  OUTLIERS in amount: 171 rows outside 3×IQR
+  ⚠  INVALID ages: 87 rows (null, negative, or >120)
+  ⚠  NEGATIVE amounts: 174 rows
+
+ANALYTICAL FINDINGS
+────────────────────────────────────────────────────────────
+
+============================================================
+  Churn Rate by Plan Type
+============================================================
+      plan  total_customers  churned  churn_rate_pct
+       Pro              391      110            28.1
+     Basic              372      104            28.0
+Enterprise              414      100            24.2
+      Free              770      183            23.8
+
+============================================================
+  Churn Rate by Age Group
+============================================================
+age_group  customers  churned  churn_rate_pct
+    18-24        239       57            23.8
+    25-34        365       97            26.6
+    35-44        388       96            24.7
+    45-54        393      101            25.7
+      55+        562      146            26.0
+
+============================================================
+  Average Spend: Churned vs Retained
+============================================================
+ is_churned   status  customers  avg_txn_amount  total_spend
+          0 Retained       1450         2487.14  89061841.25
+          1  Churned        497         2477.30  30919129.90
+
+============================================================
+  Monthly Transaction Volume Trend
+============================================================
+txn_month  transactions  total_revenue  active_customers
+  2022-01          2033     5065059.28              1280
+  2022-02          1864     4596003.04              1213
+  2022-03          2204     5488240.45              1339
+  2022-04          2109     5289257.06              1323
+  2022-05          2139     5249984.11              1294
+  2022-06          2069     5066734.56              1274
+  2022-07          2071     5245685.48              1281
+  2022-08          2039     5024630.93              1288
+  2022-09          2089     5138427.37              1317
+  2022-10          2096     5242945.96              1297
+  2022-11          1978     4967098.13              1260
+  2022-12          2138     5276557.52              1328
+
+============================================================
+  Top Cities by Revenue
+============================================================
+     city  customers  total_revenue  avg_spend
+    Delhi        276    16933266.11    2451.96
+Bangalore        260    15971570.95    2470.47
+  Unknown        251    15567073.65    2482.39
+  Chennai        238    14732975.97    2498.38
+     Pune        233    14625757.51    2513.88
+  Kolkata        239    14526700.84    2476.85
+Hyderabad        234    14234542.23    2498.60
+   Mumbai        216    13389083.89    2492.85
+
+════════════════════════════════════════════════════════════
+  DATA-DRIVEN RECOMMENDATIONS
+════════════════════════════════════════════════════════════
+1. Target Free plan users with upgrade prompts — highest churn group.
+2. Focus retention efforts on the 18-24 age segment.
+3. Investigate high-churn months and correlate with product changes.
+4. Customers who transact more frequently show lower churn — build
+   an engagement-based early warning system.
+
+Report complete. See customer_analysis.db for raw query access.
